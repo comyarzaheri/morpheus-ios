@@ -49,6 +49,7 @@
 		DDF116D91836DA3F00A1FC99 /* MorpheusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MorpheusTests.m; sourceTree = "<group>"; };
 		DDF116E51836DD4300A1FC99 /* MMRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRMainViewController.h; path = Controllers/MMRMainViewController.h; sourceTree = "<group>"; };
 		DDF116E61836DD4300A1FC99 /* MMRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRMainViewController.m; path = Controllers/MMRMainViewController.m; sourceTree = "<group>"; };
+		DDF116E91836E49700A1FC99 /* MMRConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMRConstants.h; path = Model/MMRConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +109,7 @@
 		DDF116BA1836DA3F00A1FC99 /* Morpheus */ = {
 			isa = PBXGroup;
 			children = (
+				DDF116E81836E48300A1FC99 /* Model */,
 				DDF116E41836DD2C00A1FC99 /* Controllers */,
 				DDF116E31836DD2400A1FC99 /* AppDelegate */,
 				DDF116BB1836DA3F00A1FC99 /* Supporting Files */,
@@ -160,6 +162,14 @@
 				DDF116E61836DD4300A1FC99 /* MMRMainViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		DDF116E81836E48300A1FC99 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDF116E91836E49700A1FC99 /* MMRConstants.h */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

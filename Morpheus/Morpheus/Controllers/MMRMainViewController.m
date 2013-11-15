@@ -7,6 +7,12 @@
 //
 
 #import "MMRMainViewController.h"
+#import "MMRConstants.h"
+
+
+@interface MMRMainViewController ()
+@property (strong, nonatomic) UILocalNotification *alarmNotification;
+@end
 
 @implementation MMRMainViewController
 
@@ -42,7 +48,21 @@
 
 - (void)tappedButton:(UIButton *)button
 {
-    NSLog(@"Hello!");
+    /// Create alarm notification
+    self.alarmNotification = [[UILocalNotification alloc]init];
+    
+    /// Get the chosen date from the date picker
+    NSDate *alarmDate = self.datePicker.date;
+    
+    /// If the time of day chosen has already passed, set an alarm for the next day
+    if([alarmDate timeIntervalSinceNow] <= 0) {
+        alarmDate = [alarmDate dateByAddingTimeInterval:SECONDS_PER_DAY];
+    }
+    
+    /// Set alarm fire date and schedule notification
+    [self.alarmNotification setFireDate:alarmDate];
+    [[UIApplication sharedApplication]scheduleLocalNotification:self.alarmNotification];
+    
 }
 
 @end
