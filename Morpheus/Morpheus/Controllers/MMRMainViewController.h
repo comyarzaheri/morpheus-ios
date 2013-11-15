@@ -10,4 +10,8 @@
 
 @interface MMRMainViewController : UIViewController
 
+@property (strong, nonatomic) UIButton      *alarmButton;
+@property (strong, nonatomic) UIDatePicker  *datePicker;
+
+
 @end

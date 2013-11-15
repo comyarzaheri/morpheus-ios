@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class MMRMainViewController;
+
 @interface MMRAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) MMRMainViewController *mainViewController;
 
 @end
