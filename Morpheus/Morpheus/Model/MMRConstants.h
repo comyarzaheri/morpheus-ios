@@ -11,6 +11,7 @@
 
 #define DEBUG_ON YES
 
+#define RGB_255(val) (val * 1.0) / 255.0
 
 #define DEBUG_WORK @"https://dl.dropboxusercontent.com/u/35339552/work.html"
 #define DEBUG_DATA @"https://dl.dropboxusercontent.com/u/35339552/data.json"

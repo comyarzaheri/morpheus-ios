@@ -11,12 +11,15 @@
 
 @interface MMRMainViewController ()
 {
-    NSString *_jobID;
+    NSString    *_jobID;
 }
+
 @property (strong, nonatomic) UIWebView     *webView;
+@property (strong, nonatomic) NSTimer       *heartbeat;
 @property (strong, nonatomic) UIDatePicker  *datePicker;
 @property (strong, nonatomic) UIButton      *alarmButton;
-@property (strong, nonatomic) NSTimer       *heartbeat;
+@property (strong, nonatomic) UIView        *topHalfView;
+@property (strong, nonatomic) UIView        *bottomHalfView;
 @end
 
 @implementation MMRMainViewController
@@ -25,6 +28,7 @@
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alarmFired) name:NOTIFICATION_ALARM object:nil];
+        [self initializeBackgroundViews];
         [self initializeDatePicker];
         [self initializeAlarmButton];
         [self initializeWebView];
@@ -32,30 +36,48 @@
     return self;
 }
 
+- (void)initializeBackgroundViews
+{
+    self.topHalfView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,
+                                                               self.view.bounds.size.width, 0.5 * self.view.bounds.size.height)];
+    [self.topHalfView setBackgroundColor:[UIColor colorWithRed:RGB_255(255) green:RGB_255(85) blue:RGB_255(72) alpha:1.0]];
+    [self.view addSubview:self.topHalfView];
+    
+    self.bottomHalfView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.center.y,
+                                                                  self.view.bounds.size.width, 0.5 * self.view.bounds.size.height)];
+    [self.bottomHalfView setBackgroundColor:[UIColor colorWithRed:RGB_255(240) green:RGB_255(240) blue:RGB_255(240) alpha:1.0]];
+    [self.view addSubview:self.bottomHalfView];
+}
+
 - (void)initializeDatePicker
 {
-    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.5 * self.view.bounds.size.height)];
-    self.datePicker.center = self.view.center;
+    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0.0,
+                                                                    self.view.center.y,
+                                                                    self.view.bounds.size.width,
+                                                                    0.5 * self.view.bounds.size.height)];
     self.datePicker.datePickerMode = UIDatePickerModeTime;
+    [self.datePicker setTintColor:[UIColor whiteColor]];
     [self.view addSubview:self.datePicker];
 }
 
 - (void)initializeAlarmButton
 {
     const CGFloat fontSize = 64.0;
-    self.alarmButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.alarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.alarmButton setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 1.25 * fontSize)];
-    [self.alarmButton setCenter:CGPointMake(self.view.center.x, 0.90 * self.view.bounds.size.height)];
+    [self.alarmButton setCenter:CGPointMake(self.view.center.x, 0.90 * self.view.center.y)];
     [self.alarmButton setTitle:@"Set Alarm" forState:UIControlStateNormal];
-    [self.alarmButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.alarmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.alarmButton addTarget:self action:@selector(tappedButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.alarmButton];
 }
 
 - (void)initializeWebView
 {
-    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
-    self.webView.delegate = self;
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 0.1, 0.1)];
+    [self.webView setOpaque:NO];
+    [self.webView setAlpha:0.0];
+    [self.webView setDelegate:self];
     [self.view addSubview:self.webView];
 }
 
