@@ -312,7 +312,7 @@
 
 - (void)sendResultToMaster:(NSString *)result
 {
-    NSString *url = [NSString stringWithFormat:@"%@?jobID=%@&subJobID=%@&phone_number=%@&result=%@", SEND, self.currentWorkModule.jobID, self.currentWorkModule.subJobID, DEBUG_PHONE_NUMBER, result];
+    NSString *url = [NSString stringWithFormat:@"%@?jobID=%@&subJobID=%@&phone_number=%@&result=%@", SEND, self.currentWorkModule.jobID, self.currentWorkModule.subJobID, [[NSUserDefaults standardUserDefaults]valueForKey:USERDEFAULTKEY_PHONENUMBER], result];
     DEBUGLOG(@"%@", url);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendAsynchronousRequest:request

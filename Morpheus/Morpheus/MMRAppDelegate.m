@@ -9,7 +9,6 @@
 #import "MMRAppDelegate.h"
 #import "MMRAlarmViewController.h"
 #import "MMRSettingsViewController.h"
-#import "MMRStatsViewController.h"
 
 @implementation MMRAppDelegate
 
@@ -22,16 +21,12 @@
     self.mainViewController.title = @"Alarm";
     self.mainViewController.tabBarItem.image = [UIImage imageNamed:@"clock"];
     
-    self.statsViewController = [[MMRStatsViewController alloc]init];
-    self.statsViewController.title = @"Stats";
-    self.statsViewController.tabBarItem.image = [UIImage imageNamed:@"bars"];
-    
     self.settingsViewController = [[MMRSettingsViewController alloc]init];
     self.settingsViewController.title = @"Settings";
     self.settingsViewController.tabBarItem.image = [UIImage imageNamed:@"gear"];
     
     self.tabBarController = [[UITabBarController alloc]init];
-    self.tabBarController.viewControllers = @[self.mainViewController, self.statsViewController, self.settingsViewController];
+    self.tabBarController.viewControllers = @[self.mainViewController, self.settingsViewController];
 
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];

@@ -9,30 +9,54 @@
 #import "MMRSettingsViewController.h"
 
 @interface MMRSettingsViewController ()
-
+@property (strong, nonatomic) UILabel       *phoneNumberLabel;
+@property (strong, nonatomic) UITextField   *phoneTextField;
 @end
 
 @implementation MMRSettingsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self initializePhoneTextField];
+        if(![[NSUserDefaults standardUserDefaults]valueForKey:USERDEFAULTKEY_PHONENUMBER]) {
+            [[NSUserDefaults standardUserDefaults]setValue:@"2819757962" forKey:USERDEFAULTKEY_PHONENUMBER];
+        }
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (void)initializePhoneTextField
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    const CGFloat labelFontSize = 16.0;
+    const CGFloat textFieldFontSize = 18.0;
+    self.phoneNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width - 20, 44)];
+    self.phoneNumberLabel.center = CGPointMake(self.view.center.x, 0.35 * self.view.center.y);
+    self.phoneNumberLabel.text = @"Phone Number:";
+    self.phoneNumberLabel.textColor = [UIColor darkGrayColor];
+    self.phoneNumberLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:labelFontSize];
+    [self.view addSubview:self.phoneNumberLabel];
+    
+    self.phoneTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width - 20, 44)];
+    self.phoneTextField.center = CGPointMake(self.view.center.x, 0.5 * self.view.center.y);
+    self.phoneTextField.placeholder = @"Enter Dwolla Registerd Phone Number";
+    self.phoneTextField.textColor = [UIColor blackColor];
+    self.phoneTextField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:textFieldFontSize];
+    self.phoneTextField.delegate = self;
+    [self.view addSubview:self.phoneTextField];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.phoneTextField resignFirstResponder];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([textField.text length] == 10) {
+        [[NSUserDefaults standardUserDefaults]setValue:textField.text forKey:USERDEFAULTKEY_PHONENUMBER];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
 }
 
 @end

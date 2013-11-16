@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMRSettingsViewController : UIViewController
-
+@interface MMRSettingsViewController : UIViewController <UITextFieldDelegate>
+@property (strong, nonatomic, readonly) UILabel *phoneNumberLabel;
+@property (strong, nonatomic, readonly) UITextField *phoneTextField;
 @end

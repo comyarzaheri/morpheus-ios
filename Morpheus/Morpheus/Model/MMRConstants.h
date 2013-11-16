@@ -13,19 +13,13 @@
 #define DEBUGLOG(...) if(DEBUG_ON) NSLog(__VA_ARGS__)
 
 #define RGB_255(val) (val * 1.0) / 255.0
-#define DEBUG_PHONE_NUMBER @"2819757962"
 
-#define DEBUG_WORK @"https://dl.dropboxusercontent.com/u/35339552/work.html"
-#define DEBUG_DATA @"https://dl.dropboxusercontent.com/u/35339552/data.json"
+#define AVAILABLE_NOTIFY @"54.204.25.111:8000/available"
+#define SEND @"54.204.25.111:8000/completion"
 
-#define IP_ADDRESS @"54.204.31.23:8000"
-#define AVAILABLE_NOTIFY @"http://localhost:8000/available"
-#define SEND @"http://localhost:8000/completion"
-
-#define HEARTBEAT_INTERVAL 30
 #define SECONDS_PER_DAY 86400
 #define NOTIFICATION_ALARM @"Alarm"
 
-
+#define USERDEFAULTKEY_PHONENUMBER @"phone_number"
 
 #endif
