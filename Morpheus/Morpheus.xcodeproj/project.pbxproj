@@ -30,6 +30,7 @@
 		DDF117711837CC8A00A1FC99 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF117701837CC8A00A1FC99 /* AudioToolbox.framework */; };
 		DDF117751837D05B00A1FC99 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF117741837D05B00A1FC99 /* AVFoundation.framework */; };
 		DDF117771837D70E00A1FC99 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DDF117761837D70E00A1FC99 /* alarm.mp3 */; };
+		DDF117791837ED3600A1FC99 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF117781837ED3600A1FC99 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		DDF117701837CC8A00A1FC99 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DDF117741837D05B00A1FC99 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DDF117761837D70E00A1FC99 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
+		DDF117781837ED3600A1FC99 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 		DDF1170318375E9C00A1FC99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDF117781837ED3600A1FC99 /* Icon@2x.png */,
 				DDF117761837D70E00A1FC99 /* alarm.mp3 */,
 				DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */,
 				DDF117081837605F00A1FC99 /* bars@2x.png */,
@@ -300,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDF117791837ED3600A1FC99 /* Icon@2x.png in Resources */,
 				DDF1170718375EFA00A1FC99 /* clock@2x.png in Resources */,
 				DDF116BF1836DA3F00A1FC99 /* InfoPlist.strings in Resources */,
 				DDF117771837D70E00A1FC99 /* alarm.mp3 in Resources */,
