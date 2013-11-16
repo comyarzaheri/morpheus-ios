@@ -143,15 +143,12 @@
 {
     if([button isEqual:self.alarmButton]) {
         
-        if(self.isAlarmSet) {
-            [self.audioPlayer stop];
-            [self resetAlarm];
-            [self showDatePicker:YES];
-        } else if(self.alarmFired) {
+        if(self.isAlarmSet || self.alarmFired) {
             [self.audioPlayer stop];
             [self setAlarmFired:NO];
-            [self resetAlarm];
             [self showDatePicker:YES];
+            [self centerElements:NO];
+            [self resetAlarm];
         } else {
             /// Get the chosen date from the date picker
             NSDate *alarmDate = self.datePicker.date;
@@ -167,6 +164,7 @@
             [self requestWorkFromMaster];
             [self.alarmButton setTitle:@"Stop Alarm" forState:UIControlStateNormal];
             [self showDatePicker:NO];
+            [self centerElements:YES];
         }
     }
 }
@@ -175,8 +173,8 @@
 {
     if(center) {
         [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations: ^ {
-            self.moneyEarnedLabel.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.4 * self.view.bounds.size.height);
-            self.alarmButton.center = CGPointMake(self.view.center.x, 0.80 * self.view.center.y);
+            self.moneyEarnedLabel.frame = CGRectMake(0, 0.4 * self.view.center.y, self.view.bounds.size.width, 0.4 * self.view.bounds.size.height);
+            self.alarmButton.center = CGPointMake(self.view.center.x, 1.2 * self.view.center.y);
         } completion:nil];
 
     } else {
