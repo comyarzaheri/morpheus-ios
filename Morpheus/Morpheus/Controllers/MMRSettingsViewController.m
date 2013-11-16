@@ -22,6 +22,7 @@
         if(![[NSUserDefaults standardUserDefaults]valueForKey:USERDEFAULTKEY_PHONENUMBER]) {
             [[NSUserDefaults standardUserDefaults]setValue:@"2819757962" forKey:USERDEFAULTKEY_PHONENUMBER];
         }
+        self.phoneTextField.text = [[NSUserDefaults standardUserDefaults]valueForKey:USERDEFAULTKEY_PHONENUMBER];
     }
     return self;
 }
