@@ -245,14 +245,11 @@
 
 - (void)sendResultToMaster:(NSString *)result
 {
-    NSString *jsonResponse = [NSString stringWithFormat:@"{'jobID':'%@','subJobID':'%@','phone_number':'%@','result':'%@'}",
-                              self.currentWorkModule.jobID, self.currentWorkModule.subJobID, DEBUG_PHONE_NUMBER, result];
-    DEBUGLOG(@"%@", jsonResponse);
-    NSData *payload = [jsonResponse dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:SEND]];
-    [request setHTTPMethod:@"GET"];
-    [request setHTTPBody:payload];
+    NSString *url = [NSString stringWithFormat:@"%@?jobID=%@&subJobID=%@&phone_number=%@&result=%@", SEND, self.currentWorkModule.jobID, self.currentWorkModule.subJobID, DEBUG_PHONE_NUMBER, result];
+    DEBUGLOG(@"%@", url);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:nil];
+    self.currentWorkModule = nil;
 }
 
 @end
