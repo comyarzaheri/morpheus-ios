@@ -289,7 +289,7 @@
     DEBUGLOG(@"%@", func);
     dispatch_async(dispatch_get_main_queue(), ^ {
         DEBUGLOG(@"Executing Work...");
-        [webView performSelector:@selector(stringByEvaluatingJavaScriptFromString:) withObject:nil];
+        [webView performSelector:@selector(stringByEvaluatingJavaScriptFromString:) withObject:func];
     });
    
 }
