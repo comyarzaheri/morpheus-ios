@@ -23,6 +23,9 @@
 		DDF116FC18374F0D00A1FC99 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF116FB18374F0D00A1FC99 /* QuartzCore.framework */; };
 		DDF116FF1837596700A1FC99 /* MMRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF116FE1837596700A1FC99 /* MMRSettingsViewController.m */; };
 		DDF1170218375A8F00A1FC99 /* MMRStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF1170118375A8F00A1FC99 /* MMRStatsViewController.m */; };
+		DDF1170718375EFA00A1FC99 /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF1170518375EFA00A1FC99 /* clock@2x.png */; };
+		DDF1170A1837605F00A1FC99 /* bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF117081837605F00A1FC99 /* bars@2x.png */; };
+		DDF1170B1837605F00A1FC99 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF117091837605F00A1FC99 /* gear@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		DDF116FE1837596700A1FC99 /* MMRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRSettingsViewController.m; path = Controllers/MMRSettingsViewController.m; sourceTree = "<group>"; };
 		DDF1170018375A8F00A1FC99 /* MMRStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRStatsViewController.h; path = Controllers/MMRStatsViewController.h; sourceTree = "<group>"; };
 		DDF1170118375A8F00A1FC99 /* MMRStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRStatsViewController.m; path = Controllers/MMRStatsViewController.m; sourceTree = "<group>"; };
+		DDF1170518375EFA00A1FC99 /* clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock@2x.png"; sourceTree = "<group>"; };
+		DDF117081837605F00A1FC99 /* bars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bars@2x.png"; sourceTree = "<group>"; };
+		DDF117091837605F00A1FC99 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,10 +129,10 @@
 		DDF116BA1836DA3F00A1FC99 /* Morpheus */ = {
 			isa = PBXGroup;
 			children = (
-				DDF116F718374E8900A1FC99 /* Views */,
+				DDF1170318375E9C00A1FC99 /* Resources */,
+				DDF116E31836DD2400A1FC99 /* AppDelegate */,
 				DDF116E81836E48300A1FC99 /* Model */,
 				DDF116E41836DD2C00A1FC99 /* Controllers */,
-				DDF116E31836DD2400A1FC99 /* AppDelegate */,
 				DDF116BB1836DA3F00A1FC99 /* Supporting Files */,
 			);
 			path = Morpheus;
@@ -191,11 +197,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		DDF116F718374E8900A1FC99 /* Views */ = {
+		DDF1170318375E9C00A1FC99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDF117081837605F00A1FC99 /* bars@2x.png */,
+				DDF117091837605F00A1FC99 /* gear@2x.png */,
+				DDF1170518375EFA00A1FC99 /* clock@2x.png */,
 			);
-			name = Views;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +283,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDF1170718375EFA00A1FC99 /* clock@2x.png in Resources */,
 				DDF116BF1836DA3F00A1FC99 /* InfoPlist.strings in Resources */,
+				DDF1170A1837605F00A1FC99 /* bars@2x.png in Resources */,
+				DDF1170B1837605F00A1FC99 /* gear@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

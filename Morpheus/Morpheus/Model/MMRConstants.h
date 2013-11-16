@@ -10,6 +10,7 @@
 #define Morpheus_Constants
 
 #define DEBUG_ON YES
+#define DEBUGLOG(...) if(DEBUG_ON) NSLog(__VA_ARGS__)
 
 #define RGB_255(val) (val * 1.0) / 255.0
 

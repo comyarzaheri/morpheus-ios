@@ -10,6 +10,7 @@
 
 @class MMRAlarmViewController;
 @class MMRSettingsViewController;
+@class MMRStatsViewController;
 
 @interface MMRAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) UITabBarController        *tabBarController;
 @property (strong, nonatomic) MMRAlarmViewController    *mainViewController;
 @property (strong, nonatomic) MMRSettingsViewController *settingsViewController;
+@property (strong, nonatomic) MMRStatsViewController    *statsViewController;
 
 
 @end
