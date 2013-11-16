@@ -11,6 +11,10 @@
 
 #define DEBUG_ON YES
 
+
+#define DEBUG_WORK @"https://dl.dropboxusercontent.com/u/35339552/work.html"
+#define DEBUG_DATA @"https://dl.dropboxusercontent.com/u/35339552/data.json"
+
 #define HEARTBEAT_INTERVAL 30
 #define SECONDS_PER_DAY 86400
 #define NOTIFICATION_ALARM @"Alarm"
