@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Comyar Zaheri. All rights reserved.
 //
 
-#import "MMRMainViewController.h"
+#import "MMRAlarmViewController.h"
 #import "MMRConstants.h"
 
-@interface MMRMainViewController ()
+@interface MMRAlarmViewController ()
 {
     NSString    *_jobID;
 }
@@ -20,9 +20,11 @@
 @property (strong, nonatomic) UIButton      *alarmButton;
 @property (strong, nonatomic) UIView        *topHalfView;
 @property (strong, nonatomic) UIView        *bottomHalfView;
+@property (strong, nonatomic) UILabel       *moneyEarnedLabel;
+
 @end
 
-@implementation MMRMainViewController
+@implementation MMRAlarmViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,15 +34,27 @@
         [self initializeDatePicker];
         [self initializeAlarmButton];
         [self initializeWebView];
+        [self initializeMoneyEarnedLabel];
     }
     return self;
+}
+
+- (void)initializeMoneyEarnedLabel
+{
+    const CGFloat fontSize = 64.0;
+    self.moneyEarnedLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.4 * self.view.bounds.size.height)];
+    [self.moneyEarnedLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.moneyEarnedLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize]];
+    [self.moneyEarnedLabel setText:[NSString stringWithFormat:@"$%2.2f", 0.0]];
+    [self.moneyEarnedLabel setTextColor:[UIColor whiteColor]];
+    [self.view addSubview:self.moneyEarnedLabel];
 }
 
 - (void)initializeBackgroundViews
 {
     self.topHalfView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,
                                                                self.view.bounds.size.width, 0.5 * self.view.bounds.size.height)];
-    [self.topHalfView setBackgroundColor:[UIColor colorWithRed:RGB_255(255) green:RGB_255(85) blue:RGB_255(72) alpha:1.0]];
+    [self.topHalfView setBackgroundColor:[UIColor colorWithRed:RGB_255(50) green:RGB_255(70) blue:RGB_255(91) alpha:1.0]];
     [self.view addSubview:self.topHalfView];
     
     self.bottomHalfView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.center.y,
@@ -54,7 +68,7 @@
     self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0.0,
                                                                     self.view.center.y,
                                                                     self.view.bounds.size.width,
-                                                                    0.5 * self.view.bounds.size.height)];
+                                                                    0.4 * self.view.bounds.size.height)];
     self.datePicker.datePickerMode = UIDatePickerModeTime;
     [self.datePicker setTintColor:[UIColor whiteColor]];
     [self.view addSubview:self.datePicker];
@@ -63,9 +77,17 @@
 - (void)initializeAlarmButton
 {
     const CGFloat fontSize = 64.0;
-    self.alarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.alarmButton setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 1.25 * fontSize)];
-    [self.alarmButton setCenter:CGPointMake(self.view.center.x, 0.90 * self.view.center.y)];
+    self.alarmButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.alarmButton setFrame:CGRectMake(0, 0, 0.5 * self.view.bounds.size.width, fontSize)];
+    [self.alarmButton setCenter:CGPointMake(self.view.center.x, 0.80 * self.view.center.y)];
+    
+    [self.alarmButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.alarmButton.layer setCornerRadius:15.0];
+    [self.alarmButton.layer setMasksToBounds:YES];
+    [self.alarmButton.layer setBorderWidth:1.0];
+    
+    [self.alarmButton setShowsTouchWhenHighlighted:YES];
+    
     [self.alarmButton setTitle:@"Set Alarm" forState:UIControlStateNormal];
     [self.alarmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.alarmButton addTarget:self action:@selector(tappedButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -165,6 +187,10 @@
          }
     }];
    
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

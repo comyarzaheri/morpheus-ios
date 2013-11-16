@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class MMRMainViewController;
+@class MMRAlarmViewController;
+@class MMRSettingsViewController;
 
 @interface MMRAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) MMRMainViewController *mainViewController;
+@property (strong, nonatomic) UITabBarController        *tabBarController;
+@property (strong, nonatomic) MMRAlarmViewController    *mainViewController;
+@property (strong, nonatomic) MMRSettingsViewController *settingsViewController;
+
 
 @end

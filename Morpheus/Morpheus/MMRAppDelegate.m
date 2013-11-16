@@ -7,7 +7,8 @@
 //
 
 #import "MMRAppDelegate.h"
-#import "MMRMainViewController.h"
+#import "MMRAlarmViewController.h"
+#import "MMRSettingsViewController.h"
 
 @implementation MMRAppDelegate
 
@@ -15,8 +16,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.mainViewController = [[MMRMainViewController alloc]init];
-    self.window.rootViewController = self.mainViewController;
+    
+    self.mainViewController = [[MMRAlarmViewController alloc]init];
+    self.mainViewController.title = @"Alarm";
+    
+    self.settingsViewController = [[MMRSettingsViewController alloc]init];
+    self.settingsViewController.title = @"Settings";
+    
+    self.tabBarController = [[UITabBarController alloc]init];
+    self.tabBarController.viewControllers = @[self.mainViewController, self.settingsViewController];
+    
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }

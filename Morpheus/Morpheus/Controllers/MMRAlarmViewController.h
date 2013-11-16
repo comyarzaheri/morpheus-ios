@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMRMainViewController : UIViewController <UIWebViewDelegate>
+@interface MMRAlarmViewController : UIViewController <UIWebViewDelegate>
 
 @property (strong, nonatomic, readonly) UIWebView       *webView;
 @property (strong, nonatomic, readonly) UIButton        *alarmButton;

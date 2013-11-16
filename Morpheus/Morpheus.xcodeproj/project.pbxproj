@@ -18,8 +18,11 @@
 		DDF116D01836DA3F00A1FC99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF116B81836DA3F00A1FC99 /* UIKit.framework */; };
 		DDF116D81836DA3F00A1FC99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDF116D61836DA3F00A1FC99 /* InfoPlist.strings */; };
 		DDF116DA1836DA3F00A1FC99 /* MorpheusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF116D91836DA3F00A1FC99 /* MorpheusTests.m */; };
-		DDF116E71836DD4300A1FC99 /* MMRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF116E61836DD4300A1FC99 /* MMRMainViewController.m */; };
+		DDF116E71836DD4300A1FC99 /* MMRAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF116E61836DD4300A1FC99 /* MMRAlarmViewController.m */; };
 		DDF116F31836F5D600A1FC99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF116F21836F5D600A1FC99 /* SystemConfiguration.framework */; };
+		DDF116FC18374F0D00A1FC99 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF116FB18374F0D00A1FC99 /* QuartzCore.framework */; };
+		DDF116FF1837596700A1FC99 /* MMRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF116FE1837596700A1FC99 /* MMRSettingsViewController.m */; };
+		DDF1170218375A8F00A1FC99 /* MMRStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF1170118375A8F00A1FC99 /* MMRStatsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +51,15 @@
 		DDF116D51836DA3F00A1FC99 /* MorpheusTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MorpheusTests-Info.plist"; sourceTree = "<group>"; };
 		DDF116D71836DA3F00A1FC99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDF116D91836DA3F00A1FC99 /* MorpheusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MorpheusTests.m; sourceTree = "<group>"; };
-		DDF116E51836DD4300A1FC99 /* MMRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRMainViewController.h; path = Controllers/MMRMainViewController.h; sourceTree = "<group>"; };
-		DDF116E61836DD4300A1FC99 /* MMRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRMainViewController.m; path = Controllers/MMRMainViewController.m; sourceTree = "<group>"; };
+		DDF116E51836DD4300A1FC99 /* MMRAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRAlarmViewController.h; path = Controllers/MMRAlarmViewController.h; sourceTree = "<group>"; };
+		DDF116E61836DD4300A1FC99 /* MMRAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRAlarmViewController.m; path = Controllers/MMRAlarmViewController.m; sourceTree = "<group>"; };
 		DDF116E91836E49700A1FC99 /* MMRConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMRConstants.h; path = Model/MMRConstants.h; sourceTree = "<group>"; };
 		DDF116F21836F5D600A1FC99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DDF116FB18374F0D00A1FC99 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DDF116FD1837596700A1FC99 /* MMRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRSettingsViewController.h; path = Controllers/MMRSettingsViewController.h; sourceTree = "<group>"; };
+		DDF116FE1837596700A1FC99 /* MMRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRSettingsViewController.m; path = Controllers/MMRSettingsViewController.m; sourceTree = "<group>"; };
+		DDF1170018375A8F00A1FC99 /* MMRStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRStatsViewController.h; path = Controllers/MMRStatsViewController.h; sourceTree = "<group>"; };
+		DDF1170118375A8F00A1FC99 /* MMRStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRStatsViewController.m; path = Controllers/MMRStatsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDF116FC18374F0D00A1FC99 /* QuartzCore.framework in Frameworks */,
 				DDF116F31836F5D600A1FC99 /* SystemConfiguration.framework in Frameworks */,
 				DDF116B71836DA3F00A1FC99 /* CoreGraphics.framework in Frameworks */,
 				DDF116B91836DA3F00A1FC99 /* UIKit.framework in Frameworks */,
@@ -101,6 +110,7 @@
 		DDF116B31836DA3F00A1FC99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDF116FB18374F0D00A1FC99 /* QuartzCore.framework */,
 				DDF116F21836F5D600A1FC99 /* SystemConfiguration.framework */,
 				DDF116B41836DA3F00A1FC99 /* Foundation.framework */,
 				DDF116B61836DA3F00A1FC99 /* CoreGraphics.framework */,
@@ -113,6 +123,7 @@
 		DDF116BA1836DA3F00A1FC99 /* Morpheus */ = {
 			isa = PBXGroup;
 			children = (
+				DDF116F718374E8900A1FC99 /* Views */,
 				DDF116E81836E48300A1FC99 /* Model */,
 				DDF116E41836DD2C00A1FC99 /* Controllers */,
 				DDF116E31836DD2400A1FC99 /* AppDelegate */,
@@ -162,8 +173,12 @@
 		DDF116E41836DD2C00A1FC99 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DDF116E51836DD4300A1FC99 /* MMRMainViewController.h */,
-				DDF116E61836DD4300A1FC99 /* MMRMainViewController.m */,
+				DDF116E51836DD4300A1FC99 /* MMRAlarmViewController.h */,
+				DDF116E61836DD4300A1FC99 /* MMRAlarmViewController.m */,
+				DDF116FD1837596700A1FC99 /* MMRSettingsViewController.h */,
+				DDF116FE1837596700A1FC99 /* MMRSettingsViewController.m */,
+				DDF1170018375A8F00A1FC99 /* MMRStatsViewController.h */,
+				DDF1170118375A8F00A1FC99 /* MMRStatsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -174,6 +189,13 @@
 				DDF116E91836E49700A1FC99 /* MMRConstants.h */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		DDF116F718374E8900A1FC99 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,9 +293,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDF1170218375A8F00A1FC99 /* MMRStatsViewController.m in Sources */,
 				DDF116C11836DA3F00A1FC99 /* main.m in Sources */,
 				DDF116C51836DA3F00A1FC99 /* MMRAppDelegate.m in Sources */,
-				DDF116E71836DD4300A1FC99 /* MMRMainViewController.m in Sources */,
+				DDF116FF1837596700A1FC99 /* MMRSettingsViewController.m in Sources */,
+				DDF116E71836DD4300A1FC99 /* MMRAlarmViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
