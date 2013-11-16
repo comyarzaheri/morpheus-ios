@@ -28,6 +28,9 @@
 		DDF1170B1837605F00A1FC99 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF117091837605F00A1FC99 /* gear@2x.png */; };
 		DDF1170D1837744D00A1FC99 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */; };
 		DDF1176F18378ADD00A1FC99 /* MMRWorkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF1176E18378ADD00A1FC99 /* MMRWorkModule.m */; };
+		DDF117711837CC8A00A1FC99 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF117701837CC8A00A1FC99 /* AudioToolbox.framework */; };
+		DDF117731837D02800A1FC99 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DDF117721837D02800A1FC99 /* alarm.mp3 */; };
+		DDF117751837D05B00A1FC99 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF117741837D05B00A1FC99 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DDF1176D18378ADD00A1FC99 /* MMRWorkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRWorkModule.h; path = Model/MMRWorkModule.h; sourceTree = "<group>"; };
 		DDF1176E18378ADD00A1FC99 /* MMRWorkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRWorkModule.m; path = Model/MMRWorkModule.m; sourceTree = "<group>"; };
+		DDF117701837CC8A00A1FC99 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DDF117721837D02800A1FC99 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm.mp3; path = ../../../../Downloads/alarm.mp3; sourceTree = "<group>"; };
+		DDF117741837D05B00A1FC99 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDF117751837D05B00A1FC99 /* AVFoundation.framework in Frameworks */,
+				DDF117711837CC8A00A1FC99 /* AudioToolbox.framework in Frameworks */,
 				DDF116FC18374F0D00A1FC99 /* QuartzCore.framework in Frameworks */,
 				DDF116F31836F5D600A1FC99 /* SystemConfiguration.framework in Frameworks */,
 				DDF116B71836DA3F00A1FC99 /* CoreGraphics.framework in Frameworks */,
@@ -121,6 +129,8 @@
 		DDF116B31836DA3F00A1FC99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDF117741837D05B00A1FC99 /* AVFoundation.framework */,
+				DDF117701837CC8A00A1FC99 /* AudioToolbox.framework */,
 				DDF116FB18374F0D00A1FC99 /* QuartzCore.framework */,
 				DDF116F21836F5D600A1FC99 /* SystemConfiguration.framework */,
 				DDF116B41836DA3F00A1FC99 /* Foundation.framework */,
@@ -207,6 +217,7 @@
 		DDF1170318375E9C00A1FC99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDF117721837D02800A1FC99 /* alarm.mp3 */,
 				DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */,
 				DDF117081837605F00A1FC99 /* bars@2x.png */,
 				DDF117091837605F00A1FC99 /* gear@2x.png */,
@@ -297,6 +308,7 @@
 				DDF1170718375EFA00A1FC99 /* clock@2x.png in Resources */,
 				DDF116BF1836DA3F00A1FC99 /* InfoPlist.strings in Resources */,
 				DDF1170A1837605F00A1FC99 /* bars@2x.png in Resources */,
+				DDF117731837D02800A1FC99 /* alarm.mp3 in Resources */,
 				DDF1170B1837605F00A1FC99 /* gear@2x.png in Resources */,
 				DDF1170D1837744D00A1FC99 /* Default-568h@2x.png in Resources */,
 			);
