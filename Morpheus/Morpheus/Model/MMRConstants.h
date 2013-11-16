@@ -9,7 +9,12 @@
 #ifndef Morpheus_Constants
 #define Morpheus_Constants
 
+#define DEBUG_ON YES
+
+#define HEARTBEAT_INTERVAL 30
 #define SECONDS_PER_DAY 86400
 #define NOTIFICATION_ALARM @"Alarm"
+
+
 
 #endif

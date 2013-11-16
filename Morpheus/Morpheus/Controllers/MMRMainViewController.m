@@ -9,6 +9,12 @@
 #import "MMRMainViewController.h"
 #import "MMRConstants.h"
 
+@interface MMRMainViewController ()
+@property (strong, nonatomic) UIWebView     *webView;
+@property (strong, nonatomic) UIDatePicker  *datePicker;
+@property (strong, nonatomic) UIButton      *alarmButton;
+@property (strong, nonatomic) NSTimer       *heartbeat;
+@end
 
 @implementation MMRMainViewController
 
@@ -17,7 +23,14 @@
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         [self initializeDatePicker];
         [self initializeAlarmButton];
+        [self initializeWebView];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alarmFired) name:NOTIFICATION_ALARM object:nil];
+        self.heartbeat = [[NSTimer alloc]initWithFireDate:[NSDate date]
+                                                 interval:HEARTBEAT_INTERVAL
+                                                   target:self
+                                                 selector:@selector(heartbeat:)
+                                                 userInfo:nil
+                                                  repeats:YES];
     }
     return self;
 }
@@ -42,6 +55,12 @@
     [self.view addSubview:self.alarmButton];
 }
 
+- (void)initializeWebView
+{
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 0.1, 0.1)];
+    [self.view addSubview:self.webView];
+}
+
 - (void)tappedButton:(UIButton *)button
 {
     if([button isEqual:self.alarmButton]) {
@@ -64,7 +83,15 @@
         [alarmNotification setAlertAction: NSLocalizedString(NOTIFICATION_ALARM, nil)];
         [alarmNotification setSoundName:UILocalNotificationDefaultSoundName];
         [[UIApplication sharedApplication]scheduleLocalNotification:alarmNotification];
+        
+        /// Notify master of free slave
+        
     }
+}
+
+- (void)heartbeat:(NSTimer *)timer
+{
+    NSLog(@"Heartbeat");
 }
 
 - (void)alarmFired
