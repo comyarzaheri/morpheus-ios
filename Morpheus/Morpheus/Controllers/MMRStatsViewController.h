@@ -10,4 +10,6 @@
 
 @interface MMRStatsViewController : UIViewController
 
+@property (strong, nonatomic, readonly) UILabel *balanceLabel;
+
 @end

@@ -26,6 +26,8 @@
 		DDF1170718375EFA00A1FC99 /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF1170518375EFA00A1FC99 /* clock@2x.png */; };
 		DDF1170A1837605F00A1FC99 /* bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF117081837605F00A1FC99 /* bars@2x.png */; };
 		DDF1170B1837605F00A1FC99 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF117091837605F00A1FC99 /* gear@2x.png */; };
+		DDF1170D1837744D00A1FC99 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */; };
+		DDF1176F18378ADD00A1FC99 /* MMRWorkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF1176E18378ADD00A1FC99 /* MMRWorkModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,9 @@
 		DDF1170518375EFA00A1FC99 /* clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock@2x.png"; sourceTree = "<group>"; };
 		DDF117081837605F00A1FC99 /* bars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bars@2x.png"; sourceTree = "<group>"; };
 		DDF117091837605F00A1FC99 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DDF1176D18378ADD00A1FC99 /* MMRWorkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMRWorkModule.h; path = Model/MMRWorkModule.h; sourceTree = "<group>"; };
+		DDF1176E18378ADD00A1FC99 /* MMRWorkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRWorkModule.m; path = Model/MMRWorkModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				DDF116E91836E49700A1FC99 /* MMRConstants.h */,
+				DDF1176D18378ADD00A1FC99 /* MMRWorkModule.h */,
+				DDF1176E18378ADD00A1FC99 /* MMRWorkModule.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -200,6 +207,7 @@
 		DDF1170318375E9C00A1FC99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDF1170C1837744D00A1FC99 /* Default-568h@2x.png */,
 				DDF117081837605F00A1FC99 /* bars@2x.png */,
 				DDF117091837605F00A1FC99 /* gear@2x.png */,
 				DDF1170518375EFA00A1FC99 /* clock@2x.png */,
@@ -255,6 +263,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Comyar Zaheri";
 				TargetAttributes = {
+					DDF116B01836DA3F00A1FC99 = {
+						DevelopmentTeam = TRMC2X2YJ7;
+					};
 					DDF116CB1836DA3F00A1FC99 = {
 						TestTargetID = DDF116B01836DA3F00A1FC99;
 					};
@@ -287,6 +298,7 @@
 				DDF116BF1836DA3F00A1FC99 /* InfoPlist.strings in Resources */,
 				DDF1170A1837605F00A1FC99 /* bars@2x.png in Resources */,
 				DDF1170B1837605F00A1FC99 /* gear@2x.png in Resources */,
+				DDF1170D1837744D00A1FC99 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDF1170218375A8F00A1FC99 /* MMRStatsViewController.m in Sources */,
+				DDF1176F18378ADD00A1FC99 /* MMRWorkModule.m in Sources */,
 				DDF116C11836DA3F00A1FC99 /* main.m in Sources */,
 				DDF116C51836DA3F00A1FC99 /* MMRAppDelegate.m in Sources */,
 				DDF116FF1837596700A1FC99 /* MMRSettingsViewController.m in Sources */,
@@ -428,6 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Comyar/Desktop/morpheus-ios/Morpheus",
@@ -446,6 +460,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Comyar/Desktop/morpheus-ios/Morpheus",

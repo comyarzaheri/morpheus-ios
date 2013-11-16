@@ -7,7 +7,7 @@
 //
 
 #import "MMRAlarmViewController.h"
-#import "MMRConstants.h"
+#import "MMRWorkModule.h"
 
 #pragma mark - MMRAlarmViewController Class Extension
 
@@ -23,6 +23,7 @@
 @property (strong, nonatomic) UIView        *topHalfView;
 @property (strong, nonatomic) UIView        *bottomHalfView;
 @property (strong, nonatomic) UILabel       *moneyEarnedLabel;
+@property (strong, nonatomic) MMRWorkModule *currentWorkModule;
 @property (assign, nonatomic, getter = isWorking) BOOL isWorking;
 
 @end
@@ -72,16 +73,14 @@
     
     self.bottomHalfView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.center.y,
                                                                   self.view.bounds.size.width, 0.5 * self.view.bounds.size.height)];
-    [self.bottomHalfView setBackgroundColor:[UIColor colorWithRed:RGB_255(240) green:RGB_255(240) blue:RGB_255(240) alpha:1.0]];
+    [self.bottomHalfView setBackgroundColor:[UIColor colorWithRed:RGB_255(245) green:RGB_255(245) blue:RGB_255(245) alpha:1.0]];
     [self.view addSubview:self.bottomHalfView];
 }
 
 - (void)initializeDatePicker
 {
-    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0.0,
-                                                                    0.95 * self.view.center.y,
-                                                                    self.view.bounds.size.width,
-                                                                    0.4 * self.view.bounds.size.height)];
+    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.4 * self.view.bounds.size.height)];
+    self.datePicker.center = CGPointMake(self.view.center.x, 0.5 * (self.bottomHalfView.bounds.size.height - 49) + self.view.center.y);
     self.datePicker.datePickerMode = UIDatePickerModeTime;
     [self.datePicker setTintColor:[UIColor whiteColor]];
     [self.view addSubview:self.datePicker];
@@ -126,7 +125,8 @@
             /// Stop working
             NSLog(@"Stop Working");
             [self.webView stopLoading];
-            [self.alarmButton.titleLabel setText:@"Set Alarm"];
+            [self.alarmButton setTitle:@"Set Alarm" forState:UIControlStateNormal];
+            [[UIApplication sharedApplication]cancelAllLocalNotifications];
             self.isWorking = NO;
         } else {
             /// Get the chosen date from the date picker
@@ -140,7 +140,7 @@
             [self scheduleAlarmNotificationWithAlarmDate:alarmDate];
             [self requestWorkFromMaster];
             
-            [self.alarmButton.titleLabel setText:@"Stop Alarm"];
+            [self.alarmButton setTitle:@"Stop Alarm" forState:UIControlStateNormal];
             self.isWorking = YES;
         }
     }
@@ -165,9 +165,36 @@
 
 - (void)requestWorkFromMaster
 {
-    /// DEBUG_ONLY
-    /// Use Debug work in webview
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:DEBUG_WORK]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:AVAILABLE_NOTIFY]];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue currentQueue]
+                           completionHandler: ^
+     (NSURLResponse *response, NSData *data, NSError *connectionError) {
+         NSError *error;
+         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+         NSLog(@"%@", json);
+         if (!error) {
+             DEBUGLOG(@"JSON parsed");
+             NSString *func = [json objectForKey:@"func"];
+             NSString *data = [json objectForKey:@"data"];
+             NSString *jobID = [json objectForKey:@"jobID"];
+             NSString *subJobID = [json objectForKey:@"subJobID"];
+             self.currentWorkModule = [[MMRWorkModule alloc]initWithFunc:func data:data jobID:jobID subjobID:subJobID];
+             [self executeWorkModule:self.currentWorkModule];
+         } else {
+             /// Die
+         }
+    }];
+}
+
+- (void)executeWorkModule:(MMRWorkModule *)workModule
+{
+    if (!workModule.func || !workModule.data || !workModule.jobID || !workModule.subJobID) {
+        return;
+    }
+    
+    NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    [self.webView loadHTMLString:workModule.func baseURL:baseURL];
 }
 
 #pragma mark Alarm Handler Methods
@@ -192,34 +219,44 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     DEBUGLOG(@"Finished loading view");
-    DEBUGLOG(@"Downloading Work...");
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:DEBUG_DATA]];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue currentQueue]
-                           completionHandler:
-     ^ (NSURLResponse * reponse, NSData *data, NSError *connectionError) {
-         NSError *error;
-         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-         if (!error) {
-             self->_jobID = [jsonData objectForKey:@"jobID"];
-             NSString *data = [jsonData objectForKey:@"data"];
-             NSString *argv = [[data componentsSeparatedByString:@" "] componentsJoinedByString:@","];
-             NSString *func = [NSString stringWithFormat:@"main([%@])", argv];
-             DEBUGLOG(@"Executing Work...");
-             DEBUGLOG(@"%@", func);
-             @try {
-                 NSString *result = [webView stringByEvaluatingJavaScriptFromString:func];
-                 DEBUGLOG(@"DONE");
-                 DEBUGLOG(@"Work Result: %@", result);
-             }
-             @catch (NSException *exception) {
-                 DEBUGLOG(@"ERROR executing job");
-             }
-         } else {
-             DEBUGLOG(@"ERROR executing job");
-         }
-    }];
+    NSString *data = self.currentWorkModule.data;
+    NSString *argv = [[data componentsSeparatedByString:@" "] componentsJoinedByString:@","];
+    NSString *func = [NSString stringWithFormat:@"main([%@])", argv];
+    DEBUGLOG(@"Executing Work...");
+    DEBUGLOG(@"%@", func);
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [webView performSelector:@selector(stringByEvaluatingJavaScriptFromString:) withObject:func];
+    });
    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    
+    NSString* urlString = [[request URL] absoluteString];
+    if ([urlString hasPrefix:@"result:"]) {
+        DEBUGLOG(@"Catch request");
+        NSString *path = [[request URL] path];
+        NSArray *pathComponents = [path pathComponents];
+        NSString *result = [pathComponents objectAtIndex:1];
+        DEBUGLOG(@"DONE");
+        DEBUGLOG(@"Work Result:%@", result);
+        [self sendResultToMaster:result];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (void)sendResultToMaster:(NSString *)result
+{
+    NSString *jsonResponse = [NSString stringWithFormat:@"{'jobID':%@,'subJobID':%@,'phone_number':%@,'result':%@}",
+                              self.currentWorkModule.jobID, self.currentWorkModule.subJobID, DEBUG_PHONE_NUMBER, result];
+    NSData *payload = [jsonResponse dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:SEND]];
+    [request setHTTPMethod:@"GET"];
+    [request setHTTPBody:payload];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:nil];
 }
 
 

@@ -9,24 +9,36 @@
 #import "MMRStatsViewController.h"
 
 @interface MMRStatsViewController ()
-
+@property (assign, nonatomic) CGFloat   balance;
+@property (strong, nonatomic) UILabel   *balanceLabel;
 @end
 
 @implementation MMRStatsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self initializeBalanceLabel];
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (void)initializeBalanceLabel
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    const CGFloat fontSize = 64.0;
+    self.balanceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, fontSize)];
+    [self.balanceLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.balanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize]];
+    [self.balanceLabel setText:[NSString stringWithFormat:@"$%2.2f", self.balance]];
+    [self.balanceLabel setTextColor:[UIColor blackColor]];
+    [self.view addSubview:self.balanceLabel];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    self.balance = [[DwollaAPI sharedInstance]balance];
+    self.balanceLabel.text = [NSString stringWithFormat:@"$%2.2f", self.balance];
 }
 
 - (void)didReceiveMemoryWarning
