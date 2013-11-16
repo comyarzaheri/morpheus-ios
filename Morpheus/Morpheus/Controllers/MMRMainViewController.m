@@ -21,10 +21,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alarmFired) name:NOTIFICATION_ALARM object:nil];
         [self initializeDatePicker];
         [self initializeAlarmButton];
         [self initializeWebView];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alarmFired) name:NOTIFICATION_ALARM object:nil];
         self.heartbeat = [[NSTimer alloc]initWithFireDate:[NSDate date]
                                                  interval:HEARTBEAT_INTERVAL
                                                    target:self
@@ -84,8 +84,8 @@
         [alarmNotification setSoundName:UILocalNotificationDefaultSoundName];
         [[UIApplication sharedApplication]scheduleLocalNotification:alarmNotification];
         
-        /// Notify master of free slave
-        
+        /// Notify master of free slave with heartbeat
+        [[NSRunLoop currentRunLoop]addTimer:self.heartbeat forMode:NSRunLoopCommonModes];
     }
 }
 
@@ -97,6 +97,11 @@
 - (void)alarmFired
 {
     NSLog(@"Alarm Fired");
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 @end
