@@ -39,7 +39,7 @@
     
     self.phoneTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width - 20, 44)];
     self.phoneTextField.center = CGPointMake(self.view.center.x, 0.5 * self.view.center.y);
-    self.phoneTextField.placeholder = @"Enter Dwolla Registerd Phone Number";
+    self.phoneTextField.placeholder = @"Enter Dwolla Registered Phone #";
     self.phoneTextField.textColor = [UIColor blackColor];
     self.phoneTextField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:textFieldFontSize];
     self.phoneTextField.delegate = self;
