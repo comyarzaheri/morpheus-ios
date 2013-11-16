@@ -10,10 +10,6 @@
 #import "MMRConstants.h"
 
 
-@interface MMRMainViewController ()
-@property (strong, nonatomic) UILocalNotification *alarmNotification;
-@end
-
 @implementation MMRMainViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -21,6 +17,7 @@
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         [self initializeDatePicker];
         [self initializeAlarmButton];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alarmFired) name:NOTIFICATION_ALARM object:nil];
     }
     return self;
 }
@@ -43,26 +40,36 @@
     [self.alarmButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.alarmButton addTarget:self action:@selector(tappedButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.alarmButton];
-    
 }
 
 - (void)tappedButton:(UIButton *)button
 {
-    /// Create alarm notification
-    self.alarmNotification = [[UILocalNotification alloc]init];
-    
-    /// Get the chosen date from the date picker
-    NSDate *alarmDate = self.datePicker.date;
-    
-    /// If the time of day chosen has already passed, set an alarm for the next day
-    if([alarmDate timeIntervalSinceNow] <= 0) {
-        alarmDate = [alarmDate dateByAddingTimeInterval:SECONDS_PER_DAY];
+    if([button isEqual:self.alarmButton]) {
+        
+        /// Create alarm notification
+        UILocalNotification *alarmNotification = [[UILocalNotification alloc]init];
+        
+        /// Get the chosen date from the date picker
+        NSDate *alarmDate = self.datePicker.date;
+        
+        /// If the time of day chosen has already passed, set an alarm for the next day
+        if([alarmDate timeIntervalSinceNow] < 0) {
+            alarmDate = [alarmDate dateByAddingTimeInterval:SECONDS_PER_DAY];
+        }
+        
+        /// Configure alarm and schedule notification
+        [alarmNotification setFireDate:alarmDate];
+        [alarmNotification setTimeZone:[NSTimeZone systemTimeZone]];
+        [alarmNotification setAlertBody:NSLocalizedString(@"Alarm Body", nil)];
+        [alarmNotification setAlertAction: NSLocalizedString(NOTIFICATION_ALARM, nil)];
+        [alarmNotification setSoundName:UILocalNotificationDefaultSoundName];
+        [[UIApplication sharedApplication]scheduleLocalNotification:alarmNotification];
     }
-    
-    /// Set alarm fire date and schedule notification
-    [self.alarmNotification setFireDate:alarmDate];
-    [[UIApplication sharedApplication]scheduleLocalNotification:self.alarmNotification];
-    
+}
+
+- (void)alarmFired
+{
+    NSLog(@"Alarm Fired");
 }
 
 @end

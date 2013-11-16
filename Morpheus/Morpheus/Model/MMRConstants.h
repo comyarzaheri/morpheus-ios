@@ -10,5 +10,6 @@
 #define Morpheus_Constants
 
 #define SECONDS_PER_DAY 86400
+#define NOTIFICATION_ALARM @"Alarm"
 
 #endif
