@@ -288,6 +288,7 @@
     NSString *func = [NSString stringWithFormat:@"main([%@])", argv];
     DEBUGLOG(@"%@", func);
     dispatch_async(dispatch_get_main_queue(), ^ {
+        DEBUGLOG(@"Executing Work...");
         [webView performSelector:@selector(stringByEvaluatingJavaScriptFromString:) withObject:func];
     });
    

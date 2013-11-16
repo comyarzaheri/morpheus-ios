@@ -14,8 +14,8 @@
 
 #define RGB_255(val) (val * 1.0) / 255.0
 
-#define AVAILABLE_NOTIFY @"54.204.25.111:8000/available"
-#define SEND @"54.204.25.111:8000/completion"
+#define AVAILABLE_NOTIFY @"http://54.204.25.111:8000/available"
+#define SEND @"http://54.204.25.111:8000/completion"
 
 #define SECONDS_PER_DAY 86400
 #define NOTIFICATION_ALARM @"Alarm"
