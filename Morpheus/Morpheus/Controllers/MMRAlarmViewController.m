@@ -17,7 +17,6 @@
 }
 
 @property (strong, nonatomic) UIWebView     *webView;
-@property (strong, nonatomic) NSTimer       *heartbeat;
 @property (strong, nonatomic) UIDatePicker  *datePicker;
 @property (strong, nonatomic) UIButton      *alarmButton;
 @property (strong, nonatomic) UIView        *topHalfView;
@@ -25,6 +24,7 @@
 @property (strong, nonatomic) UILabel       *moneyEarnedLabel;
 @property (strong, nonatomic) MMRWorkModule *currentWorkModule;
 @property (assign, nonatomic, getter = isWorking) BOOL isWorking;
+@property (assign, nonatomic, getter = isAlarmSet) BOOL isAlarmSet;
 
 @end
 
@@ -179,10 +179,11 @@
              NSString *data = [json objectForKey:@"data"];
              NSString *jobID = [json objectForKey:@"jobID"];
              NSString *subJobID = [json objectForKey:@"subJobID"];
+             DEBUGLOG(@"%@", jobID);
              self.currentWorkModule = [[MMRWorkModule alloc]initWithFunc:func data:data jobID:jobID subjobID:subJobID];
              [self executeWorkModule:self.currentWorkModule];
          } else {
-             /// Die
+             [self performSelector:@selector(requestWorkFromMaster) withObject:nil afterDelay:90.0];
          }
     }];
 }
@@ -190,7 +191,7 @@
 - (void)executeWorkModule:(MMRWorkModule *)workModule
 {
     if (!workModule.func || !workModule.data || !workModule.jobID || !workModule.subJobID) {
-        return;
+        [self performSelector:@selector(requestWorkFromMaster) withObject:nil afterDelay:60.0];
     }
     
     NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
@@ -202,9 +203,6 @@
 - (void)alarmFired
 {
     NSLog(@"Alarm Fired");
-    [self.heartbeat invalidate];
-    self.heartbeat = nil;
-    NSLog(@"%@", self.heartbeat);
 }
 
 #pragma mark Dealloc
@@ -218,11 +216,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    DEBUGLOG(@"Finished loading view");
     NSString *data = self.currentWorkModule.data;
     NSString *argv = [[data componentsSeparatedByString:@" "] componentsJoinedByString:@","];
     NSString *func = [NSString stringWithFormat:@"main([%@])", argv];
-    DEBUGLOG(@"Executing Work...");
     DEBUGLOG(@"%@", func);
     dispatch_async(dispatch_get_main_queue(), ^ {
         [webView performSelector:@selector(stringByEvaluatingJavaScriptFromString:) withObject:func];
@@ -235,13 +231,12 @@
     
     NSString* urlString = [[request URL] absoluteString];
     if ([urlString hasPrefix:@"result:"]) {
-        DEBUGLOG(@"Catch request");
         NSString *path = [[request URL] path];
         NSArray *pathComponents = [path pathComponents];
         NSString *result = [pathComponents objectAtIndex:1];
-        DEBUGLOG(@"DONE");
         DEBUGLOG(@"Work Result:%@", result);
         [self sendResultToMaster:result];
+        [self performSelector:@selector(requestWorkFromMaster) withObject:nil afterDelay:15.0];
         return NO;
     } else {
         return YES;
@@ -250,15 +245,14 @@
 
 - (void)sendResultToMaster:(NSString *)result
 {
-    NSString *jsonResponse = [NSString stringWithFormat:@"{'jobID':%@,'subJobID':%@,'phone_number':%@,'result':%@}",
+    NSString *jsonResponse = [NSString stringWithFormat:@"{'jobID':'%@','subJobID':'%@','phone_number':'%@','result':'%@'}",
                               self.currentWorkModule.jobID, self.currentWorkModule.subJobID, DEBUG_PHONE_NUMBER, result];
+    DEBUGLOG(@"%@", jsonResponse);
     NSData *payload = [jsonResponse dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:SEND]];
     [request setHTTPMethod:@"GET"];
     [request setHTTPBody:payload];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:nil];
 }
-
-
 
 @end

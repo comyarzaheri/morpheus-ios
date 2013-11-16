@@ -18,6 +18,7 @@
 #define DEBUG_WORK @"https://dl.dropboxusercontent.com/u/35339552/work.html"
 #define DEBUG_DATA @"https://dl.dropboxusercontent.com/u/35339552/data.json"
 
+#define IP_ADDRESS @"54.204.31.23:8000"
 #define AVAILABLE_NOTIFY @"http://localhost:8000/available"
 #define SEND @"http://localhost:8000/completion"
 
